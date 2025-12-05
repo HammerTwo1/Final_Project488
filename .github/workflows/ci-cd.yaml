@@ -84,17 +84,14 @@ jobs:
 
     steps:
 
-
       - uses: actions/checkout@v4
 
-      # Set lowercase owner (for GHCR) and short image tag
       - name: Set variables
         id: vars
         run: |
           echo "OWNER_LC=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_OUTPUT
           echo "IMAGE_TAG=${GITHUB_SHA::7}" >> $GITHUB_OUTPUT
 
-      # Export image names as env vars for later steps
       - name: Set image envs
         run: |
           echo "FRONTEND_IMAGE=ghcr.io/${{ steps.vars.outputs.OWNER_LC }}/frontend" >> $GITHUB_ENV
