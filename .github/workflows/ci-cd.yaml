@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY: ghcr.io/${{ github.repository_owner }}
-  FRONTEND_IMAGE: ghcr.io/${{ github.repository_owner }}/frontend
-  PRODUCT_IMAGE: ghcr.io/${{ github.repository_owner }}/product-api
-  ORDER_IMAGE: ghcr.io/${{ github.repository_owner }}/order-api
+  REGISTRY: ghcr.io/${{ steps.vars.outputs.owner_lc }}
+  FRONTEND_IMAGE: ghcr.io/${{ steps.vars.outputs.owner_lc }}/frontend
+  PRODUCT_IMAGE: ghcr.io/${{ steps.vars.outputs.owner_lc }}/product-api
+  ORDER_IMAGE: ghcr.io/${{ steps.vars.outputs.owner_lc }}/order-api
 
 jobs:
   test:
@@ -49,6 +49,8 @@ jobs:
         working-directory: product-api
         run: |
           pytest || echo "No tests yet"
+      
+
 
   security_scan:
     runs-on: ubuntu-latest
@@ -83,6 +85,10 @@ jobs:
       packages: write
       id-token: write
     steps:
+      - name: Set lowercase owner
+        id: vars
+        run: echo "owner_lc=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_OUTPUT
+
       - uses: actions/checkout@v4
 
       - name: Log in to GitHub Container Registry
