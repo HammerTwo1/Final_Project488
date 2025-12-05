@@ -103,7 +103,8 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ steps.vars.outputs.OWNER_LC }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.CR_PAT }}
+
 
           
 
