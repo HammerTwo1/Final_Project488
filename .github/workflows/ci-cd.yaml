@@ -211,10 +211,10 @@ jobs:
           IMAGE_TAG: ${{ steps.vars.outputs.IMAGE_TAG }}
         continue-on-error: true
         run: |
-          kubectl apply -f k8s/hpa-product.yaml
-          sed -e "s/\${IMAGE_TAG}/${IMAGE_TAG}/g" k8s/deployment-frontend.yaml | kubectl apply -f -
-          sed -e "s/\${IMAGE_TAG}/${IMAGE_TAG}/g" k8s/deployment-product.yaml | kubectl apply -f -
-          sed -e "s/\${IMAGE_TAG}/${IMAGE_TAG}/g" k8s/deployment-order.yaml | kubectl apply -f -
+          kubectl apply --dry-run=client --validate=false -f k8s/hpa-product.yaml
+          sed -e "s/\${IMAGE_TAG}/${IMAGE_TAG}/g" k8s/deployment-frontend.yaml | kubectl apply --dry-run=client --validate=false -f -
+          sed -e "s/\${IMAGE_TAG}/${IMAGE_TAG}/g" k8s/deployment-product.yaml  | kubectl apply --dry-run=client --validate=false -f -
+          sed -e "s/\${IMAGE_TAG}/${IMAGE_TAG}/g" k8s/deployment-order.yaml   | kubectl apply --dry-run=client --validate=false -f -
 
   rollback_production:
     name: Rollback Production
