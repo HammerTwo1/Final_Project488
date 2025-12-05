@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
 
 env:
-  REGISTRY: ghcr.io/your-org
-  FRONTEND_IMAGE: ghcr.io/your-org/frontend
-  PRODUCT_IMAGE: ghcr.io/your-org/product-api
-  ORDER_IMAGE: ghcr.io/your-org/order-api
+  REGISTRY: ghcr.io/${{ github.repository_owner }}
+  FRONTEND_IMAGE: ghcr.io/${{ github.repository_owner }}/frontend
+  PRODUCT_IMAGE: ghcr.io/${{ github.repository_owner }}/product-api
+  ORDER_IMAGE: ghcr.io/${{ github.repository_owner }}/order-api
 
 jobs:
   test:
