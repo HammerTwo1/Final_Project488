@@ -129,7 +129,7 @@ jobs:
       - name: Scan frontend image with Trivy
         uses: aquasecurity/trivy-action@0.24.0
         with:
-          image-ref: $FRONTEND_IMAGE:${{ steps.vars.outputs.IMAGE_TAG }}
+          image-ref: ${{ env.FRONTEND_IMAGE }}:${{ steps.vars.outputs.IMAGE_TAG }}
           format: 'table'
           exit-code: '1'
           vuln-type: 'os,library'
@@ -138,7 +138,7 @@ jobs:
       - name: Scan product-api image with Trivy
         uses: aquasecurity/trivy-action@0.24.0
         with:
-          image-ref: $PRODUCT_IMAGE:${{ steps.vars.outputs.IMAGE_TAG }}
+          image-ref: ${{ env.PRODUCT_IMAGE }}:${{ steps.vars.outputs.IMAGE_TAG }}
           format: 'table'
           exit-code: '1'
           vuln-type: 'os,library'
@@ -147,7 +147,7 @@ jobs:
       - name: Scan order-api image with Trivy
         uses: aquasecurity/trivy-action@0.24.0
         with:
-          image-ref: $ORDER_IMAGE:${{ steps.vars.outputs.IMAGE_TAG }}
+          image-ref: ${{ env.ORDER_IMAGE }}:${{ steps.vars.outputs.IMAGE_TAG }}
           format: 'table'
           exit-code: '1'
           vuln-type: 'os,library'
